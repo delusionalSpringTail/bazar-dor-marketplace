@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${hind.variable} font-hind h-full antialiased`}>
+    <html lang="en | bn" suppressHydrationWarning className={`${hind.variable} font-hind h-full antialiased`}>
       <body className={` min-h-full flex flex-col `}>
         {children}
       </body>
