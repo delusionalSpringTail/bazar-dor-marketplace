@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Eye, EyeOff, Check, X } from "lucide-react";
 import Link from "next/link";
 import { signIn } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 
 export default function SignInForm() {
   const [email, setEmail] = useState("");
@@ -23,7 +24,7 @@ export default function SignInForm() {
 
   const isValidPassword = passwordRules.every((rule) => rule.test);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setTouched({ email: true, password: true });
 
@@ -31,10 +32,23 @@ export default function SignInForm() {
       return;
     }
 
+    // toast
+    // sign up code
+    // sign in code
+    // navbar logic of codition
+
+
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
-    console.log(data);
+    const { data: resData, error } = await signIn.email({
+      email: data.email as string,
+      password: data.password as string,
+      callbackURL: "/",
+    });
+    if (error) {
+      toast.error(error.message as string);
+    }
   };
 
   const handleGoogleSignIn = async () => {
@@ -72,8 +86,8 @@ export default function SignInForm() {
               onBlur={() => setTouched((prev) => ({ ...prev, email: true }))}
               placeholder="you@example.com"
               className={`w-full rounded-xl border px-3.5 py-3 text-sm sm:text-base transition-colors outline-none bg-white text-slate-900 ${touched.email && !isValidEmail
-                  ? "border-red-500 focus:border-red-500 ring-1 ring-red-500"
-                  : "border-slate-200 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600"
+                ? "border-red-500 focus:border-red-500 ring-1 ring-red-500"
+                : "border-slate-200 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600"
                 }`}
             />
             {touched.email && !isValidEmail && (
@@ -95,8 +109,8 @@ export default function SignInForm() {
                 onBlur={() => setTouched((prev) => ({ ...prev, password: true }))}
                 placeholder="কমপক্ষে ৮ অক্ষর"
                 className={`w-full rounded-xl border pl-3.5 pr-11 py-3 text-sm sm:text-base transition-colors outline-none bg-white text-slate-900 ${touched.password && !isValidPassword
-                    ? "border-red-500 focus:border-red-500 ring-1 ring-red-500"
-                    : "border-slate-200 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600"
+                  ? "border-red-500 focus:border-red-500 ring-1 ring-red-500"
+                  : "border-slate-200 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600"
                   }`}
               />
               <button

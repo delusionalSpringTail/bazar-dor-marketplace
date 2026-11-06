@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 const hind = Hind_Siliguri({
   variable: "--font-hind-mono",
@@ -17,7 +18,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en | bn" suppressHydrationWarning className={`${hind.variable} font-hind h-full antialiased`}>
       <body suppressHydrationWarning className={` min-h-full flex flex-col `}>
-        {children}
+        <main>
+          {children}
+        </main>
+        <Toaster></Toaster>
       </body>
     </html>
   );

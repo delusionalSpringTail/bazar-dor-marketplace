@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { Eye, EyeOff, Check, X } from "lucide-react";
 import Link from "next/link";
 import { signIn, signUp } from "@/lib/auth-client";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
   const [name, setName] = useState("");
@@ -14,6 +16,8 @@ export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+
+const router = useRouter();
 
   const [touched, setTouched] = useState({
     name: false,
@@ -63,7 +67,14 @@ export default function RegisterForm() {
         name: data.name as string,
     });
 
-    console.log(resData, error);
+    if (resData?.user?.name) {
+      toast.success("Account Created Successfully, Login to continue");
+      router.push("/signin");
+    }
+
+    if (error) {
+        toast.error(error?.message as string)
+    }
   };
 
     const handleGoogleSignIn = async () => {
