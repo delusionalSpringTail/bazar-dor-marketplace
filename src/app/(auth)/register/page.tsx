@@ -1,9 +1,9 @@
-
 "use client";
 
 import React, { useState } from "react";
 import { Eye, EyeOff, Check, X } from "lucide-react";
 import Link from "next/link";
+import { signIn, signUp } from "@/lib/auth-client";
 
 export default function RegisterForm() {
   const [name, setName] = useState("");
@@ -36,7 +36,7 @@ export default function RegisterForm() {
   const isValidConfirmPassword =
     confirmPassword.length > 0 && confirmPassword === password;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async(e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setTouched({
       name: true,
@@ -57,6 +57,19 @@ export default function RegisterForm() {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
+    const { data:resData, error } = await signUp.email({
+        email: data.email as string, 
+        password: data.password as string,
+        name: data.name as string,
+    });
+
+    console.log(resData, error);
+  };
+
+    const handleGoogleSignIn = async () => {
+    const data = await signIn.social({
+      provider: "google",
+    });
     console.log(data);
   };
 
@@ -260,7 +273,8 @@ export default function RegisterForm() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <button
             type="button"
-            className="flex items-center justify-center gap-2.5 rounded-xl border border-slate-200 bg-white py-2.5 px-3 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
+            onClick={handleGoogleSignIn}
+            className="cursor-pointer flex items-center justify-center gap-2.5 rounded-xl border border-slate-200 bg-white py-2.5 px-3 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
           >
             <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24">
               <path
@@ -285,7 +299,8 @@ export default function RegisterForm() {
 
           <button
             type="button"
-            className="flex items-center justify-center gap-2.5 rounded-xl border border-slate-200 bg-white py-2.5 px-3 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
+            disabled
+            className="cursor-not-allowed flex items-center justify-center gap-2.5 rounded-xl border border-slate-200 bg-white py-2.5 px-3 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
           >
             <svg
               className="h-4 w-4 shrink-0 fill-current text-slate-800"

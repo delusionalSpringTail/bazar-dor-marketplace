@@ -1,9 +1,9 @@
-
 "use client";
 
 import React, { useState } from "react";
 import { Eye, EyeOff, Check, X } from "lucide-react";
 import Link from "next/link";
+import { signIn } from "@/lib/auth-client";
 
 export default function SignInForm() {
   const [email, setEmail] = useState("");
@@ -37,11 +37,18 @@ export default function SignInForm() {
     console.log(data);
   };
 
+  const handleGoogleSignIn = async () => {
+    const data = await signIn.social({
+      provider: "google",
+    });
+    console.log(data);
+  };
+
   return (
     <div className="font-hind flex min-h-screen flex-col items-center justify-center bg-[#f4f7f5] px-4 py-8 sm:px-6">
       {/* Main Card */}
       <div className="w-full max-w-[460px] rounded-2xl bg-white p-6 sm:p-8 shadow-sm border border-slate-100">
-        
+
         {/* Header Section */}
         <div className="text-center mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">সাইন ইন</h1>
@@ -51,7 +58,7 @@ export default function SignInForm() {
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4.5">
-          
+
           {/* Email Field */}
           <div className="flex flex-col gap-1.5">
             <label className="text-sm font-medium text-slate-700">
@@ -64,11 +71,10 @@ export default function SignInForm() {
               onChange={(e) => setEmail(e.target.value)}
               onBlur={() => setTouched((prev) => ({ ...prev, email: true }))}
               placeholder="you@example.com"
-              className={`w-full rounded-xl border px-3.5 py-3 text-sm sm:text-base transition-colors outline-none bg-white text-slate-900 ${
-                touched.email && !isValidEmail
+              className={`w-full rounded-xl border px-3.5 py-3 text-sm sm:text-base transition-colors outline-none bg-white text-slate-900 ${touched.email && !isValidEmail
                   ? "border-red-500 focus:border-red-500 ring-1 ring-red-500"
                   : "border-slate-200 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600"
-              }`}
+                }`}
             />
             {touched.email && !isValidEmail && (
               <p className="text-xs sm:text-sm text-red-500 mt-1">Please enter a valid email address.</p>
@@ -88,11 +94,10 @@ export default function SignInForm() {
                 onChange={(e) => setPassword(e.target.value)}
                 onBlur={() => setTouched((prev) => ({ ...prev, password: true }))}
                 placeholder="কমপক্ষে ৮ অক্ষর"
-                className={`w-full rounded-xl border pl-3.5 pr-11 py-3 text-sm sm:text-base transition-colors outline-none bg-white text-slate-900 ${
-                  touched.password && !isValidPassword
+                className={`w-full rounded-xl border pl-3.5 pr-11 py-3 text-sm sm:text-base transition-colors outline-none bg-white text-slate-900 ${touched.password && !isValidPassword
                     ? "border-red-500 focus:border-red-500 ring-1 ring-red-500"
                     : "border-slate-200 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600"
-                }`}
+                  }`}
               />
               <button
                 type="button"
@@ -145,7 +150,8 @@ export default function SignInForm() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <button
             type="button"
-            className="flex items-center justify-center gap-2.5 rounded-xl border border-slate-200 bg-white py-2.5 px-3 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
+            onClick={handleGoogleSignIn}
+            className="cursor-pointer flex items-center justify-center gap-2.5 rounded-xl border border-slate-200 bg-white py-2.5 px-3 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
           >
             <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -155,10 +161,11 @@ export default function SignInForm() {
             </svg>
             Google দিয়ে চালিয়ে যান
           </button>
-          
+
           <button
             type="button"
-            className="flex items-center justify-center gap-2.5 rounded-xl border border-slate-200 bg-white py-2.5 px-3 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
+            disabled
+            className="cursor-not-allowed flex items-center justify-center gap-2.5 rounded-xl border border-slate-200 bg-white py-2.5 px-3 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
           >
             <svg className="h-4 w-4 shrink-0 fill-current text-slate-800" viewBox="0 0 24 24">
               <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
@@ -169,7 +176,7 @@ export default function SignInForm() {
 
         {/* Footer Signup Link */}
         <div className="mt-6 text-center text-xs sm:text-sm text-slate-500">
-          অ্যাকাউন্ট নেই?{" "} 
+          অ্যাকাউন্ট নেই?{" "}
           <Link
             href="/register"
             className="font-semibold text-emerald-600 hover:underline"
