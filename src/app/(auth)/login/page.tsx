@@ -5,11 +5,9 @@ import { Eye, EyeOff, Check, X } from "lucide-react";
 import Link from "next/link";
 import { signIn } from "@/lib/auth-client";
 import toast from "react-hot-toast";
-import { useSearchParams } from "next/navigation";
 
 export default function SignInForm() {
-  const searchParams = useSearchParams(); // Get URL search parameters
-  const callbackUrl = searchParams.get("callbackUrl") || "/"; // Fallback to "/" if none exists
+
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -42,7 +40,7 @@ export default function SignInForm() {
     const { data: resData, error } = await signIn.email({
       email: data.email as string,
       password: data.password as string,
-      callbackURL: callbackUrl,
+      callbackURL: "/",
     });
     if (error) {
       toast.error(error.message as string);
@@ -54,7 +52,6 @@ export default function SignInForm() {
   const handleGoogleSignIn = async () => {
     const data = await signIn.social({
       provider: "google",
-      callbackURL: callbackUrl,
     });
 
   };
