@@ -3,7 +3,7 @@ import React, { Suspense } from "react";
 import CategoryCards from "@/components/CategoryCards";
 
 const getData = async (slug: string): Promise<IProduct[]> => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?category=${slug}`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?category=${slug}`, { cache: "no-store", });
     const data = await response.json();
     return data;
 };

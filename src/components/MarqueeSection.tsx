@@ -12,7 +12,7 @@ const MarqueeSection = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`, { cache: "no-store", });
         const data: IProduct[] = await response.json();
         setProducts(data.slice(0, 10));
       } catch (error) {
