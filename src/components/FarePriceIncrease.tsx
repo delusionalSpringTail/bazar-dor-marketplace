@@ -63,9 +63,9 @@ const FarePriceIncrease = () => {
                             >
                                 {/* Top Part: Icon with square container & Name/Unit */}
                                 <div className="flex items-center gap-4">
-                                    {product.categoryIcon && (
+                                    {product.image && (
                                         <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50 text-2xl border border-slate-100 shrink-0">
-                                            {product.categoryIcon}
+                                            {product.image}
                                         </div>
                                     )}
                                     <div>
