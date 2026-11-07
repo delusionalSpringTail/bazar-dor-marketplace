@@ -1,3 +1,4 @@
+import AllProducts from "@/components/AllProducts";
 import BannerSection from "@/components/Banner";
 import Category from "@/components/Category";
 import FarePriceDecrease from "@/components/FarePriceDecrease";
@@ -13,6 +14,7 @@ export default function Home() {
       <BannerSection></BannerSection>
       <FarePriceIncrease></FarePriceIncrease>
       <FarePriceDecrease></FarePriceDecrease>
+      <AllProducts></AllProducts>
       কমপক্ষে ৮ অক্ষর
       <div className="flex items-center justify-center p-2">
         <Loader className="h-6 w-6 animate-spin text-[#00873e]" />
