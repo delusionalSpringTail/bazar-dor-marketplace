@@ -24,7 +24,7 @@ const AllProducts = () => {
     }, []);
 
     return (
-        <section className="w-full bg-[#f0f5f0] py-6 sm:py-8 px-4 sm:px-6">
+        <section id="all-products" className="w-full bg-[#f0f5f0] py-6 sm:py-8 px-4 sm:px-6">
             <div className="mx-auto max-w-7xl">
                 
                 {/* Section Title & Subtitle */}

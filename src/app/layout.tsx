@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/Navbar";
 import Category from "@/components/Category";
+import Footer from "@/components/Footer";
 
 const hind = Hind_Siliguri({
   variable: "--font-hind-mono",
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <Toaster></Toaster>
+        <Footer></Footer>
       </body>
     </html>
   );
