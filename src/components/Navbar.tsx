@@ -105,7 +105,7 @@ export default function Navbar() {
                     className="h-9 w-9 rounded-full object-cover border border-slate-200 shadow-2xs"
                   />
                 ) : (
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700 font-bold border border-slate-200 text-sm">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-800 font-bold border border-slate-200 text-sm">
                     {getInitial(data.user.name)}
                   </div>
                 )}
