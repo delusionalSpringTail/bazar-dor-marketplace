@@ -33,7 +33,7 @@ const AllProducts = () => {
                         সব পণ্য
                     </h2>
                     <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                        মোট {allProducts.length}টি পণ্য দেখানো হচ্ছে
+                        মোট {allProducts.length.toLocaleString("bn-BD")}টি পণ্য দেখানো হচ্ছে
                     </p>
                 </div>
 
@@ -69,7 +69,7 @@ const AllProducts = () => {
                             return (
                                 <Link
                                     key={product.id}
-                                    href={`/product/${product.slug}`}
+                                    href={`/product/${product.id}`}
                                     className="group flex flex-col justify-between rounded-2xl bg-white p-5 sm:p-6 border border-slate-100 shadow-2xs hover:shadow-md transition-all duration-200"
                                 >
                                     {/* Top Part: Icon container & Name/Unit */}

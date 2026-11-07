@@ -58,7 +58,7 @@ const FarePriceDecrease = () => {
                         topDecreasedRoutes.map((product) => (
                             <Link
                                 key={product.id}
-                                href={`/product/${product.slug}`}
+                                href={`/product/${product.id}`}
                                 className="group flex flex-col justify-between rounded-2xl bg-white p-5 sm:p-6 border border-slate-100 shadow-2xs hover:shadow-md transition-all duration-200"
                             >
                                 {/* Top Part: Icon with square container & Name/Unit */}

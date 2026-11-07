@@ -51,7 +51,7 @@ const MarqueeSection = () => {
               return (
                 <Link
                   key={product.id}
-                  href={`/product/${product.slug}`}
+                  href={`/product/${product.id}`}
                   className="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-slate-50/80 hover:bg-slate-100/80 border border-slate-100 transition-colors shrink-0 text-xs sm:text-sm text-slate-800 shadow-2xs"
                 >
                   {/* Category Icon */}

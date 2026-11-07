@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { Loader2, ArrowLeft, Mail, User, Check, AlertCircle } from "lucide-react";
+import { Loader2, ArrowLeft, Mail, User, Check } from "lucide-react";
 import { updateUser, useSession } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -51,11 +51,11 @@ export default function UpdateProfilePage() {
     if (isPending) {
         return (
             <div className="flex min-h-screen flex-col items-center bg-[#f4f7f5] px-4 py-8 sm:px-6">
-                <div className="w-full max-w-[560px] mb-6 animate-pulse">
+                <div className="w-full max-w-140 mb-6 animate-pulse">
                     <div className="h-4 w-36 bg-slate-200 rounded-md"></div>
                 </div>
 
-                <div className="w-full max-w-[560px] rounded-2xl bg-white p-6 sm:p-8 shadow-sm border border-slate-100 animate-pulse">
+                <div className="w-full max-w-140 rounded-2xl bg-white p-6 sm:p-8 shadow-sm border border-slate-100 animate-pulse">
                     <div className="text-center mb-8 flex flex-col items-center">
                         <div className="h-8 w-44 bg-slate-200 rounded-lg mb-2"></div>
                         <div className="h-4 w-64 bg-slate-200 rounded-md"></div>
@@ -76,7 +76,7 @@ export default function UpdateProfilePage() {
         <div className="flex min-h-screen flex-col items-center bg-[#f4f7f5] px-4 py-8 sm:px-6">
 
             {/* Return to Profile Link */}
-            <div className="w-full max-w-[560px] mb-6">
+            <div className="w-full max-w-140 mb-6">
                 <Link
                     href="/profile"
                     className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-slate-600 hover:text-slate-900 transition-colors"
@@ -87,7 +87,7 @@ export default function UpdateProfilePage() {
             </div>
 
             {/* Main Container */}
-            <div className="w-full max-w-[560px] rounded-2xl bg-white p-6 sm:p-8 shadow-sm border border-slate-100">
+            <div className="w-full max-w-140 rounded-2xl bg-white p-6 sm:p-8 shadow-sm border border-slate-100">
 
                 {/* Header Section */}
                 <div className="text-center mb-8">
