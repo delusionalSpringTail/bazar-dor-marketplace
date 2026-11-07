@@ -56,7 +56,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#fcfdfd] border-b border-slate-100 shadow-xs">
+    <header className="sticky top-0 z-50 w-full bg-[#fcfdfd] border-b border-slate-100">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3">
 
         {/* Left Section: Logo Box, Title, and Date */}
