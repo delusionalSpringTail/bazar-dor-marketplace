@@ -1,16 +1,17 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { 
-  ShoppingCartPlus, 
-  Loader2, 
-  CircleUser, 
-  UserPen, 
-  LogOut, 
-  ChevronDown 
+import {
+  ShoppingCartPlus,
+  CircleUser,
+  UserPen,
+  LogOut,
+  ChevronDown,
+  Loader
 } from "lucide-react";
 import Link from "next/link";
 import { signOut, useSession } from "@/lib/auth-client";
+import Image from "next/image";
 
 
 export default function Navbar() {
@@ -57,16 +58,23 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full bg-[#fcfdfd] border-b border-slate-100 shadow-xs">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3">
-        
+
         {/* Left Section: Logo Box, Title, and Date */}
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#00873e] text-white shadow-xs">
-            <ShoppingCartPlus size={22} />
-          </div>
+          <Link
+            href="/">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#00873e] text-white shadow-xs">
+              <ShoppingCartPlus size={22} />
+            </div>
+          </Link>
           <div className="flex flex-col">
-            <span className="text-lg sm:text-xl font-bold tracking-tight text-slate-900 leading-snug">
-              বাজার দর
-            </span>
+            <Link
+              href="/"
+            >
+              <span className="text-lg sm:text-xl font-bold tracking-tight text-slate-900 leading-snug">
+                বাজার দর
+              </span>
+            </Link>
             <span className="text-xs sm:text-sm text-slate-500 font-medium">
               {formattedDate}
             </span>
@@ -78,7 +86,7 @@ export default function Navbar() {
           {isPending ? (
             // Loading State
             <div className="flex items-center justify-center p-2">
-              <Loader2 className="h-6 w-6 animate-spin text-[#00873e]" />
+              <Loader className="h-6 w-6 animate-spin text-[#00873e]" />
             </div>
           ) : data?.user?.name ? (
             // Authenticated State (Profile & Dropdown)
@@ -89,9 +97,11 @@ export default function Navbar() {
                 aria-expanded={dropdownOpen}
               >
                 {data.user.image ? (
-                  <img
+                  <Image
                     src={data.user.image}
                     alt={data.user.name}
+                    width={36}
+                    height={36}
                     className="h-9 w-9 rounded-full object-cover border border-slate-200 shadow-2xs"
                   />
                 ) : (
@@ -99,11 +109,11 @@ export default function Navbar() {
                     {getInitial(data.user.name)}
                   </div>
                 )}
-                
+
                 <span className="hidden sm:inline text-sm font-semibold text-slate-800">
                   {getFirstName(data.user.name)}
                 </span>
-                
+
                 <ChevronDown size={14} className="text-slate-500 hidden sm:inline" />
               </button>
 
@@ -126,7 +136,7 @@ export default function Navbar() {
                   </Link>
 
                   <Link
-                    href="/update-profile"
+                    href="/profile/update-profile"
                     onClick={() => setDropdownOpen(false)}
                     className="flex items-center gap-3 px-4 py-2.5 text-xs sm:text-sm text-slate-700 hover:bg-slate-50 transition-colors"
                   >
